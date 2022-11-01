@@ -1,0 +1,27 @@
+Array :
+
+    1) Program to Compare two Arrays are Equal or Not in JavaScript
+
+    2) Remove duplicate value form array
+
+    3) Find Union & Intersection
+
+
+Integer Number :
+
+    1) Reverse the integer number
+
+    2) Find if number is prime or not
+
+    3) Find factorial
+
+    4) Find fibbonacchi series
+
+
+Theory Question
+
+    1) What is Big O Notation
+
+    2) Curring in JavaScript
+ 
+

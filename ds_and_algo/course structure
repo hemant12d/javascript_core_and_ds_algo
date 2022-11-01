@@ -1,0 +1,38 @@
+Data structure and algorithem with javascript
+
+Total section: 29
+
+Section - I ( 1-18 ) ( Done )
+Section - II ( 19-24 ) ( w... )
+Section - III ( 25-29 )
+
+
+# 6 algorithem that every developer should know 
+
+    -> Sorting algorithem 
+        * Bubble Sorting
+        * Merge Sorting
+        * Quick Sorting
+        * Heap Sorting
+
+    -> Searching algorithem
+        * Binary Searching
+        * Breadth-first-Searching
+        * Depth-first Searching
+
+    -> Dynamic Programming
+
+    -> Recursion algorithem
+
+    -> Devide and Conquer algorithem
+
+    -> Hashing algorithem
+
+
+Other concept
+
+Execution of expression in javascript (imp)
+
+At what point Ds and algo is enough ?
+    -> You knwo following 6 algo, 
+    -> Attempt 250 complete question of love babbar series and you are done

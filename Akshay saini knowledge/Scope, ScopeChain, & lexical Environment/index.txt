@@ -1,0 +1,16 @@
+It's a new way of learning may be it can be write or wrong let's think little about it
+
+# SCOPE :- 
+
+Scope => Scope means, Where you can access variable or function in our code
+
+There are two ways to see the scope :-
+
+(i) What is the scope of variable or function (In other words what's bourdary of this, where we can access this)
+
+(ii) Is variable of function inside the scope of of following function which I am accessing 
+
+
+# LEXICAL ENVIRONMENT :- 
+
+Lexical Environment => Local memory along with lexical environment of parent

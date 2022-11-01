@@ -1,0 +1,594 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Sandeep Maheshwari
+    </title>
+    <link rel="icon" href="https://www.sandeepmaheshwari.com/images\favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://www.sandeepmaheshwari.com/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://www.sandeepmaheshwari.com/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="css/Layout.css" />
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css" />
+    <!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/Layout-IE.css" /><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" type="text/css" href="css/Layout-IE.css" /><![endif]-->
+    <script type="text/javascript" language="javascript" charset="utf-8" src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <link rel="stylesheet"
+        href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <link href="https://www.sandeepmaheshwari.com/css/style_sandeep.css?v1.0" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .style3 {
+            color: #3333FF;
+            font-size: 13px;
+        }
+
+        .style6 {
+            width: 40%;
+        }
+
+        .style7 {
+            width: 13%;
+        }
+
+        .big {
+            width: 20em;
+            height: 20em;
+        }
+
+        input[type="radio"] {
+            margin: -2px 0 0 !important;
+        }
+    </style>
+
+
+    <script language="javascript" type="text/javascript">
+        function validationSem() {
+            var msg = "";
+            var $ = jQuery.noConflict();
+
+            if (document.getElementById('name').value == "") {
+                document.getElementById('name').value = ""
+                msg += "Enter Your Full Name.\n";
+            }
+
+
+            if (document.getElementById('txtemail').value == "") {
+                document.getElementById('txtemail').value = ""
+                msg += "Enter Email Address.\n";
+            }
+
+            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z0-9]{2,9})$/;
+            if (reg.test(document.getElementById('txtemail').value) == false && document.getElementById('txtemail').value != '') {
+                msg = msg + 'Enter Valid Email Address.\n';
+            }
+
+
+            if (document.getElementById('txtmobile_1').value == "") {
+                document.getElementById('txtmobile_1').value = ""
+                msg += "Enter Mobile No.\n";
+            }
+
+            if (document.getElementById('txtmobile_1').value != "") {
+                var inputtxt = document.getElementById('txtmobile_1').value;
+                var cknum = "0";
+                var numbers = /^[0-9]+$/;
+                if (document.getElementById('txtmobile_1').value.match(numbers)) {
+                    cknum = "1";
+                }
+                if (cknum != "1") {
+                    msg += "Enter Valid Mobile No.\n";
+                }
+            }
+
+            //var dd = $("#txt_dd").val();
+            //var month = $("#txt_mm").val();
+            //var year = $("#txt_yy").val();
+
+            //var dd = $("#podate").val();
+
+            //if (dd == "" ) {
+            //    msg += "Select Date of Birth\n";
+            //}
+
+            //if (document.getElementById("dd_day").value == "0") {
+            //    msg = msg + 'Select Date \n';
+            //}
+            //if (document.getElementById("dd_month").value == "0") {
+            //    msg = msg + 'Select Month\n';
+            //}
+            //if (document.getElementById("dd_year").value == "0") {
+            //    msg = msg + 'Select Year\n';
+            //}
+
+
+            if (document.getElementById('dd_age').value == "0") {
+                msg += "Select Age.\n";
+            }
+
+            if (document.getElementById('ddlage_2').value == "") {
+                msg += "Select Gender.\n";
+            }
+
+            if (document.getElementById('dd_occupation').value == "Select") {
+                msg += "Select Occupation.\n";
+            }
+
+            if (document.getElementById('dd_state').value == "0") {
+                msg += "Select State.\n";
+            }
+
+            //if (document.getElementById('txt_Question').value == "") {
+            //    msg += "Tell us something more about yourself.\n";
+            //}
+
+
+            if (document.getElementById("inputcaptcha").value == "") {
+                msg += "Enter Verification Code.\n";
+            }
+            if (document.getElementById("inputcaptcha").value != "") {
+                var captchenter = document.getElementById("hdnCode").value;
+                var captchshow = document.getElementById("inputcaptcha").value;
+                if (captchenter != captchshow) {
+                    msg += "Enter correct Verification Code.\n";
+                }
+            }
+
+
+            if (msg != "") {
+                alert(msg, 'Required Fields');
+                return false;
+            }
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+        function WordC() {
+            var words2 = document.getElementById("txt_Question").value;
+            var words = words2.length;
+            document.getElementById("word_left").innerHTML = (300 - words) + "&nbsp;&nbsp;characters remaining";
+            if (words >= 300) {
+                document.getElementById("btn_save").focus();
+            }
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        async function getNewCode() {
+            $.ajax({
+                type: "GET",
+                url: "https://www.sandeepmaheshwari.com/CImage.aspx/GenerateRandomCode",
+                complete: function (data) {
+                    var strcode = data.responseText;
+                    $("#hdnCode").val(strcode);
+                    $("#requestdemo1_lblCaptchaCode").text(strcode);
+                }
+            });
+
+            const respone = await fetch("https://www.sandeepmaheshwari.com/CImage.aspx/GenerateRandomCode");
+            console.log(respone);
+        }
+    </script>
+
+
+</head>
+
+<body onload="getNewCode();">
+    <div id="Layout">
+        <form method="post" action="https://www.sandeepmaheshwari.com/SeminarRegistrationlive.aspx" id="form1">
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
+                value="/wEPDwUKMTkyNjA1NTQxN2QYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgYFA3JkMQUDcmQyBQNyZDIFA3JkMwUDcmQzBQhidG5fc2F2ZXNUKAllcIeBE5H8omA1Gg8+mefQM0VPtcioETn9j4zh" />
+
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A48C84CD" />
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION"
+                value="/wEdACxR2F21+fT4hu5yZW3fYzkR1VXLCZniQEihPDabNrSt9MLEB2UoLWpNBnJFX99K9wcWpcW/ukPhpw9e604hJ3A/B/lX62of50Ko/bkKv97B63ng11AaAAXvzID4JZwQz0GUS45rrU2+mggGnB196NYrW53iVWQWf5pyTpdRqIrRPa6IloDgqb2j6CI1qrCzevQVfTNKRoQqygi236/Dx0slf2EH1k0VMPLKfFe4PldojySFj7dDU/M24Y1GwqthjCzVrwZW0aENa4xH+oe6v807qus2dp60gvDzcIYIQftw8xMq0iDXH0SQV0cCbl3p9U6eQyjBzmMTWle1hvBs2aJktXpvaFwBwMbhfC6+wpFSJkJhxFFQNeigYrHAFo8yLnCMGkOpzvLQTFcbL1GFb5k++9s62JsebvhmC/XOo8DZZY9MSXRlCZD5/MO6WNTfD0c/JDm/65Hgkn5kX476krxyEsjg3eBov186zQpOpZbuiFmIHqsr6lZBPwN1dvCwPjBApbOHVUEqe15ApVXq/IgBUgJvcEn7Sv1IyMHcq7qfeCB+aPU3UtaSoL3wDyUvev0uOOvY7RLA75AUFWam/7GmvOi3iwUsPSzC8ebPMleRfNXUm3HFVXIQqGadYZKbLUc38B4r5GLJ9zAv5duTlxkxp4o91xDfAIriajxDGxi76fWeiwEQ77rVc+r7vkFMoa1A2dZ9CQR5Kjd3ph1Ty5dsheZSFCxWx2oseLcnYOL4A01IucF798ItIODlKn/VFPbLyC9yY3XKt7n8S7YdXF9CC0hU1Ctkp/9k2ALlR2QG2Q1bcy2fd5dEbZiqYCW4zZRwjb6SeTWIXeTcEsfrLpvqO7zsOZGrnTiYPJbrEqgLRane9ECu3pgmLMkNQALckxDv/crVKU8pMdLD5YWprEEUYdp8PLLcr00Ykm6GIg/QPkFFRse3q//oMi3r6wfDMnOJPBhGAafPP0BZIeVGBRlX" />
+            <input type="hidden" id="txtage" name="txtage" value="" />
+            <input type="hidden" id="txtage1" name="txtage1" value="" />
+            <div id="Container">
+                <link rel="icon" href="http://sandeepmaheshwari.com/images/favicon.ico">
+                <script>
+                    var jq = jQuery.noConflict();
+                    jq(function () {
+
+                        var pull = jq('#pull');
+                        menu = jq('#menu_mobile ul');
+                        menuHeight = menu.height();
+
+                        jq(pull).on('click', function (e) {
+
+                            e.preventDefault();
+                            menu.slideToggle();
+                        });
+
+                        jq(window).resize(function () {
+                            var w = jq(window).width();
+                            if (w > 320 && menu.is(':hidden')) {
+                                menu.removeAttr('style');
+                            }
+                        });
+                    });
+                </script>
+                <div id="Header">
+                    <div id="navigation">
+                        <div class="innerNav">
+                            <div class="logo"><a href="default.aspx">
+                                    <picture>
+                                        <source media="(max-width: 767px)" srcset="images/Mobile_logo_sm.jpg">
+                                        <source media="(max-width: 1024px)" srcset="images/SandeepMaheshwariLogo.jpg">
+                                        <img src="images/SandeepMaheshwariLogo.jpg" border="0" />
+                                </a>
+                                </picture>
+                            </div>
+                            <div class="SM_social">
+                                <a href="http://www.youtube.com/user/SandeepSeminars" target="_blank"><img
+                                        src="images/YouTube.jpg" /></a>
+                                <a href="https://www.facebook.com/SandeepMaheshwariPage" target="_blank"><img
+                                        src="images/Facebook.jpg" /></a>
+                                <a href="https://twitter.com/sandeepseminars" target="_blank"><img
+                                        src="images/twitter.png" /></a>
+                                <a href="https://www.instagram.com/sandeep__maheshwari/" target="_blank"><img
+                                        src="images/Insta-logo.png" /></a>
+                                <!--<a href="https://plus.google.com/+SandeepSeminars" target="_blank"><img src="images/google-plus.png" /></a>-->
+                                <!--<a href="https://en.wikipedia.org/wiki/Sandeep_Maheshwari_(Inspirational_Speaker)" target="_blank"><img src="images/wikipedia.png" /></a>-->
+                            </div>
+
+                            <div id="menu_mobile">
+                                <div id="navigation_container">
+                                    <a id="pull" href="#">MENU</a>
+                                    <ul>
+                                        <li><a href="default.aspx" class="home">Home</a></li>
+                                        <li><a href="thePerson.aspx" class="person">The Person</a></li>
+                                        <li><a href="https://www.youtube.com/SandeepSeminars" target="_blank"
+                                                class="">Videos</a></li>
+                                        <li><a href="myfavourites.aspx" class="favourites">Recommended Books</a></li>
+                                        <li><a href="freedownload" class="freedownload">Free Downloads</a></li>
+                                        <!--<li><a href="comments.aspx" class="share">Comments</a></li>
+                            <li><a href="https://www.facebook.com/SandeepMaheshwariPage/reviews" class="share" target="_blank">Reviews</a></li>-->
+                                        <li><a href="contact.aspx" class="contact">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="navLine">
+                            <div class="red"></div>
+                            <div class="blue"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div id="Content">
+                    <div id="page_content">
+
+
+                        <div class="pagePics">
+                            <!--<a href="http://www.youtube.com/watch?v=CdolLmN6OSI" target="_blank" border="0"></a>-->
+                            <img src="images/livesession.jpg">
+                        </div>
+                        <div class="homeContent" style="width:100%">If you are interested in attending a LIVE
+                            Session by Sandeep Maheshwari, kindly fill up the form given below. Whenever there's a
+                            session in your city/state, we will randomly shortlist a few people and will send an
+                            Entry Pass (along with the venue details) through an email/sms. Needless to say, it's
+                            free.</div>
+
+
+                        <div class="container">
+
+
+
+                            <div class="reg_form">
+                                <p style="font-size:14px;">Fields marked by an asterisk (<span class="red">*</span>)
+                                    are required fields.</p>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">Your Full Name: <span
+                                            class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input name="name" type="text" id="name" class="form-control input350"
+                                            maxlength="40" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">Email Address: <span
+                                            class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input name="txtemail" type="text" id="txtemail" class="form-control input350"
+                                            maxlength="50" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">Mobile No.: <span
+                                            class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input name="txtmobile_1" type="text" id="txtmobile_1"
+                                            class="form-control input350" maxlength="15" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">Age: <span
+                                            class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select name="dd_age" id="dd_age" class="input_home_select input_gender select">
+                                            <option value="0">Select</option>
+                                            <option value="Less than 12 years">Less than 12 years</option>
+                                            <option value="12-14 years">12-14 years</option>
+                                            <option value="14-16 years">14-16 years</option>
+                                            <option value="16-18 years">16-18 years</option>
+                                            <option value="18-20 years">18-20 years</option>
+                                            <option value="20-22 years">20-22 years</option>
+                                            <option value="22-25 years">22-25 years</option>
+                                            <option value="25-30 years">25-30 years</option>
+                                            <option value="30-35 years">30-35 years</option>
+                                            <option value="35-40 years">35-40 years</option>
+                                            <option value="40-50 years">40-50 years</option>
+                                            <option value="More than 50 years">More than 50 years</option>
+
+                                        </select>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">Gender: <span
+                                            class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select name="ddlage_2" id="ddlage_2"
+                                            class="input_home_select input_gender select">
+                                            <option value="">Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">Occupation: <span
+                                            class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select name="dd_occupation" id="dd_occupation"
+                                            class="input_home_select input_gender select">
+                                            <option value="Select">Select</option>
+                                            <option value="School Student">School Student</option>
+                                            <option value="Undergraduate Student">Undergraduate Student</option>
+                                            <option value="Postgraduate Student">Postgraduate Student</option>
+                                            <option value="Job">Job</option>
+                                            <option value="Entrepreneur">Entrepreneur</option>
+                                            <option value="Creative Professional">Creative Professional</option>
+                                            <option value="Self Employed/Freelancer">Self Employed/Freelancer</option>
+                                            <option value="Unemployed">Unemployed</option>
+                                            <option value="Engineer">Engineer</option>
+                                            <option value="Doctor">Doctor</option>
+                                            <option value="Lawyer">Lawyer</option>
+                                            <option value="Teacher">Teacher</option>
+                                            <option value="NGO/Social Worker">NGO/Social Worker</option>
+                                            <option value="CA/CS">CA/CS</option>
+                                            <option value="Housewife">Housewife</option>
+                                            <option value="Sales Professional">Sales Professional</option>
+                                            <option value="Other">Other</option>
+
+                                        </select>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">State: <span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select name="dd_state" id="dd_state" class="input_home_select select">
+                                            <option value="0">Select</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                            </option>
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                            <option value="Daman and Diu">Daman and Diu</option>
+                                            <option value="Delhi NCR">Delhi NCR</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Puducherry">Puducherry</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telengana">Telengana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+                                        </select>
+                                        <div style="font-style:italic;margin-top:-8px;">Please Note:
+                                            Most of the sessions are conducted in Delhi NCR.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <label class="control-label col-sm-12" for="email">What kind of sessions are you
+                                        interested in? <span class="red">*</span></label>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-sm-12">
+
+                                        <span class="big"><input id="rd1" type="radio" name="rdb" value="rd1"
+                                                checked="checked" /></span>&nbsp;Motivational
+                                        Sessions Only<br />
+                                        <input id="rd2" type="radio" name="rdb" value="rd2" />&nbsp;Spiritual Sessions
+                                        Only<br />
+                                        <input id="rd3" type="radio" name="rdb" value="rd3" />&nbsp;Both of these
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="display:none;">
+
+                                <label class="control-label col-sm-12" for="email">Tell us something more about
+                                    yourself: <span class="red">*</span>​</label>
+
+                            </div>
+
+                            <div class="form-group" style="display:none;">
+
+                                <div class="col-sm-12">
+                                    <textarea name="txt_Question" id="txt_Question" class="form-control style333"
+                                        maxlength="300" onkeyup="WordC();"></textarea>
+                                    <br /><span id="word_left" name="word_left"></span>
+                                    <input name="hdnCode" type="hidden" id="hdnCode" />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="email">Verification Code: <span
+                                        class="red">*</span></label>
+                                <div class="col-sm-8">
+                                    <input name="inputcaptcha" type="text" id="inputcaptcha"
+                                        class="form-control input_captcha" size="30" placeholder="Type given code here"
+                                        autocomplete="off" />
+                                    <span id="requestdemo1_lblCaptchaCode" class="captcha-text"></span>
+                                    <input type="image" name="requestdemo1_imgbtnRefresh" class="captcha"
+                                        id="requestdemo1_imgbtnRefresh" src="https://www.sandeepmaheshwari.com/images/captcha_refresh.gif"
+                                        onClick="getNewCode(); return false;" />
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group regis-btn">
+                                <div class="col-sm-offset-0 col-sm-10" style="text-align:center;">
+
+                                    <!-- <button type="submit" class="btn btn-default">Submit</button>-->
+                                    <input type="image" name="btn_save" id="btn_save" src="https://www.sandeepmaheshwari.com/images/submit.png"
+                                        onclick="return validationSem();" />
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="Footer">
+                    <div class="clear"></div>
+
+                    <div id="footerBottom">
+                        <div class="ftr_left">
+                            <div class="content">
+                                <div class="txt_bottom">
+                                    <div class="title">Get Inspired</div>
+                                    <div class="txt">To receive notifications of new
+                                        videos, simply subscribe
+                                        <br />to Sandeep Maheshwari's YouTube channel.
+                                    </div>
+                                </div>
+                                <div class="social_box">
+                                    <div class="lft"><a target="_blank"
+                                            href="http://www.youtube.com/user/SandeepSeminars"><img border="0"
+                                                src="images/YT_LOGO.jpg"></a>
+                                        SUBSCRIBERS</div>
+                                    <div class="rgt">
+                                        <script src="https://apis.google.com/js/platform.js">
+                                        </script>
+                                        <div class="g-ytsubscribe" data-channel="SandeepSeminars" data-layout="default"
+                                            data-count="default" style="width:130px; height:30px;"></div>
+                                    </div>
+                                    <div class="link"><a href="http://youtube.com/sandeepseminars"
+                                            target="_blank">YouTube.com/SandeepSeminars</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="ftr_right">
+                            <div class="content">
+                                <div class="txt_bottom">
+                                    <div class="title">Let's Connect</div>
+                                    <div class="txt">To get regular updates on the
+                                        forthcoming
+                                        sessions,<br /> simply visit Sandeep Maheshwari's Facebook Page.</div>
+                                </div>
+                                <div class="social_box">
+                                    <div class="lft"><a target="_blank"
+                                            href="https://www.facebook.com/SandeepMaheshwariPage"><img border="0"
+                                                src="images/FB_LOGO.JPG"></a>
+                                        LIKES</div>
+                                    <div class="rgt">
+                                        <div id="fb-root" style="float:left;">
+                                        </div>
+                                        <script>
+                                            (function (d, s, id) {
+                                                var js, fjs = d.getElementsByTagName(s)[0];
+                                                if (d.getElementById(id)) return;
+                                                js = d.createElement(s); js.id = id;
+                                                js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+                                                fjs.parentNode.insertBefore(js, fjs);
+                                            }(document, 'script', 'facebook-jssdk'));
+                                        </script>
+                                        <div class="fb-like" data-href="https://www.facebook.com/SandeepMaheshwariPage"
+                                            data-layout="button_count" data-action="like" data-show-faces="true"
+                                            data-share="false" style="width:130px; height:30px;">
+                                        </div>
+                                    </div>
+                                    <div class="link"><a href="http://Facebook.com/Sandeepmaheshwaripage"
+                                            target="_blank">Facebook.com/SandeepMaheshwariPage</a>
+                                    </div>
+                                </div>
+
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="cstech"><a href="http://csquaretech.com/" title="Web Design India" target="_blank"><img src="images/Web-Design-India.gif" alt="Web Design India" title="Web Design India" /></a></div>-->
+                    <div class="clear"></div>
+
+                </div>
+
+                <script type="text/javascript">
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-1499328-4']);
+                    _gaq.push(['_trackPageview']);
+
+                    (function () {
+                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();
+
+                </script>
+            </div>
+    </div>
+    <div style="display:none;">
+
+    </div>
+
+    </form>
+    </div>
+</body>
+
+</html>

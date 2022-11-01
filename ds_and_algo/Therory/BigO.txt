@@ -1,0 +1,6 @@
+BigO => It's give a trend & big details about the algorithm.
+
+It's a methematical notation & gives a big picture of algoritm's time & space complexity.
+
+It's also gives an idea of alogrithms's performance in the sense of time & space complexity.
+

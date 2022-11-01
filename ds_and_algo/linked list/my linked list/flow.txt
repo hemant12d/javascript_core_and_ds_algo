@@ -1,0 +1,40 @@
+# Basic linked list ( D )
+    -> LinkedList is the dynamic data structure.
+    -> As we can add or remove elements at ease. ( easy or less difficulty )
+    -> It can even grow as needed. Just like arrays.
+    -> linked lists store elements sequentially.
+    -> It don’t store the elements contiguously like an array. 
+
+# Add, create, & get linked list methods ( D )
+
+# Push node to index ( D )
+
+    % Expected Cases
+
+        * Fix re arranging issue ( D )
+
+            -> Use Array builtin method with assuming that, It's a linked list
+
+        * Test linked list  ( D )
+
+        * Fix the list length issue ( D )
+
+        * When it's inserting to first position ( D )
+
+        * What if he is adding to last ( D )
+
+            -> Fix one issue ( What if there is no items in the list when you are adding to last) 
+
+        * Address should be unique ( D )
+
+# Remove node
+
+    * From Start!, end!, middle!
+        
+../ Here
+
+# Get Node Values
+
+    -> List [[4, "ss34er"], [5, "ss45er"], [5, "ss34ff"]]
+
+    -> Output [4, 5, 8]

@@ -1,0 +1,21 @@
+                                        Target to get 25,000/- salary
+                ____________________________________|_______________________________________
+                |                                                                           |                                                                           ||                                                                           |
+(1) Things that you select & planned                                            (2) Things that you missed
+
+                          
+a) Node.js, Express & MongoDB because it's essential.                              a) Server hosting basics  ( Devops do this )
+
+b) Ds algo & JavaScript is secondary but essential.
+
+c) Git basics is third enough.
+
+d) Server, Security & IP are fourth details basic you can done easily.
+
+e) All are the important as per my current level of understanding.
+
+f) May be you need communication & nagotiation skill.
+
+
+
+--------------------- Reasons why you failed ---------------------
