@@ -1,0 +1,24 @@
+# Mean, median, and mode
+    Mean, median, and mode are different measures of center in a numerical data set. They each try to summarize a dataset with a single number to represent a "typical" data point from the dataset.
+
+
+Mean: The "average" number; found by adding all data points and dividing by the number of data points.
+Example: The mean of 4, 1, and 7 is (4+1+7)/3 = 12/3 = 4
+
+// Normal formuls
+mean = sum of data points / count of data points
+
+// Formally formula
+mean = ∑Xi/n
+​
+
+Median: The middle number; found by ordering all data points and picking out the one in the middle (or if there are two middle numbers, taking the mean of those two numbers).
+Example: The median of 4, 1, and 7 is 4 because when the numbers are put in order the number 4 is in the middle.
+To find the median:
+    Arrange the data points from smallest to largest.
+    If the number of data points is odd, the median is the middle data point in the list.
+    If the number of data points is even, the median is the average of the two middle data points in the list.
+
+    
+Mode: The most frequent number—that is, the number that occurs the highest number of times.
+Example: The mode of [2, 3, 3, 3, 2, 2, 2, 4, 4] is 2 because it occurs 4 times,
