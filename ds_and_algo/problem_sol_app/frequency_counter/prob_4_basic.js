@@ -63,13 +63,13 @@ const consecutiveArrFreCount = arr => {
 
 
 const findMinOrderDeletionOrAppend = () => {
-
-    // Check if occurrences of all elements is already equal.
-    const isOccrrenceEqual = checkIfOccurrenceEqual(arr);
-    if(isOccrrenceEqual) return 0;
-
+    
     // count arr frequency
     const conArrFreCt = consecutiveArrFreCount(arr);
+    
+    // Check if occurrences of all elements is already equal.
+    const isOccrrenceEqual = checkIfOccurrenceEqual(conArrFreCt);
+    if(isOccrrenceEqual) return 0;
 
     // Use median algorithems to find absolute difference
 }
