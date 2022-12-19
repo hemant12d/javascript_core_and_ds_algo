@@ -28,3 +28,5 @@ const selectionSort = arr => {
 console.log(selectionSort([9, 56, 3, 5, 3, 5, 6]))
 console.log(selectionSort([9, 56, 5, 6]))
 console.log(selectionSort([3, 2, 5, 7, 9, 11, 21, 2]))
+
+

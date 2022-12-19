@@ -44,3 +44,13 @@ const bubbleSort = arr => {
 // console.log(bubbleSort([9, 56, 3, 5, 3, 5, 6]))
 // console.log(bubbleSort([9, 56, 5, 6]))
 console.log(bubbleSort([3, 2, 5, 7, 9, 11, 21, 2]))
+
+
+// Swap with array
+// let a = 10;
+// let b = 5;
+// console.log("before", a, b)
+// let result = [b, a];
+// a = result[0]
+// b = result[1]
+// console.log("after", a, b)

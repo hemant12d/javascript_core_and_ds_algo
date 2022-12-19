@@ -75,7 +75,7 @@ const numberToWordConverter = num =>{
     }
 
     // Handle five digit
-    10_000 - 99_999
+    // 10_000 - 99_999
     if(num > 9_999 && num < 1_000_00){   
         // Handle ten thousands
         if(numStr.endsWith('000'))

@@ -1,0 +1,245 @@
+# Order placing
+ 
+# Best case of placing the order
+const customerOrder = [
+    {
+        name: "Shampoo",
+        qty: 3,
+        price: 25,
+        totalPrice: 75,
+        type: "normal-order"
+    },
+    {
+        name: "Butter",
+        qty: 1,
+        price: 25,
+        totalPrice: 25,
+        type: "normal-order"
+    },
+]
+ 
+# Order entry to database
+{
+    product: [
+        Shampoo, Butter
+    ],
+    type: "normal-order",
+    totalProductCost: 100,
+    shippingCost: 30,
+    totalCost: 130
+},
+ 
+ 
+# Worst case for placing the order
+const customerOrder = [
+    {
+        name: "Tirupati Milk",
+        qty: 3,
+        price: 25,
+        totalPrice: 75,
+        type: "normal-order"
+    },
+    {
+        name: "Cheese",
+        qty: 1,
+        price: 250,
+        totalPrice: 250,
+        type: "subscription-based-order",
+        fromDate: "2022-12-11T17:59:40.418Z",
+        toDate: "2023-02-11T17:59:40.418Z",
+        deliveredTime: "2022-12-11T18:12:37.650Z"
+    },
+    {
+        name: "Coco powder",
+        qty: 1,
+        price: 250,
+        totalPrice: 250,
+        type: "subscription-based-order",
+        fromDate: "2022-12-11T17:59:40.418Z",
+        toDate: "2023-02-11T17:59:40.418Z",
+        deliveredTime: "2022-12-11T18:12:37.650Z"
+    },
+    {
+        name: "Gulabjamun",
+        qty: 1,
+        price: 52,
+        totalPrice: 52,
+        type: "scheduled",
+        deliveredDate: "2023-02-11T17:59:40.418Z",
+        deliveredTime: "2022-12-11T18:12:37.650Z"
+    },
+]
+ 
+ 
+# Order entry for worst case in the database
+{
+    product: [
+        Tirupati milk
+    ],
+    type: "normal-order",
+    totalProductCost: 75,
+    shippingCost: 30,
+    totalCost: 105
+},
+{
+    product: [
+        Gulabjamun
+    ],
+    type: "scheduled",
+    totalProductCost: 52,
+    shippingCost: 30,
+    totalCost: 82
+},
+{
+    product: [
+        Cheese, Coco-powder
+    ],
+    type: "subscription-based-order",
+    totalProductCost: 500,
+    shippingCost: 30,
+    totalCost: 530
+},
+ 
+ 
+ 
+# Few Edge Cases for displaying the order
+* How we will return order of specific customer
+    -> We can populate order
+    -> Frontend will fetch order from product field array
+    -> Product price, quantity and total price is mentioned in the product. So displaying won't be issue.
+ 
+* How we will return order for admin panel
+    * Will show list order with embedded document
+        * In this we can show discount price, applied coupon, total amount after discount.
+ 
+    * We can either wind the order to multiple order
+        * In this we will not be able to show applied coupon, total amount, and discount.
+ 
+# Issue you are facing in this approach
+    * Facing the issue of tracking the shipping cost.
+        -> Create main order table for that, put rest order to another order table,
+        In this approach main table will handle common things like
+        shipping cost, discount, applied coupon, over all cost of three orders.
+
+        -> Keep tracking of shipping, coupon, discount is not a good idea with order MVP implementation.
+ 
+    * What if order date is different and customer choose COD payment method ?
+
+    * How customer will cancel particular order or particular product
+       
+    * Does putting cost of each product on sub order table will make sense ?
+        ->
+
+
+
+# Solved edge cases of order module
+    * How customer will cancel the order 
+        -> You can initiate a refund from razor pay dashboard, mannually.
+
+    * May be on single time customer can only place one type or order.
+        -> We can either filter orders on the backend side.
+
+    * You were facing the issue in shipping cost for multiple order.
+        -> Shipping cost we will be add in the end during payment.
+        -> All the order will be delivered from same owner, so for now we can assume that shipping cost will constant
+
+
+# On Hold 
+    * How application will less discounted price if customer cancels the order
+
+
+
+# All steps to complete the order module
+
+-> Simply setup the order system
+
+( Once basic setup is done, then we will complete it )
+-> Add discount feature
+
+-> Add coupon feature
+
+-> Add refund feature
+
+
+
+// Design order table
+
+1)
+{
+    product: [
+        Tirupati milk
+    ],
+    type: "normal-order",
+    totalProductCost: 75,
+    shippingCost: 30,
+    totalCost: 105
+},
+{
+    product: [
+        Gulabjamun
+    ],
+    type: "scheduled",
+    totalProductCost: 52,
+    shippingCost: 30,
+    totalCost: 82
+},
+{
+    product: [
+        Cheese, Coco-powder
+    ],
+    type: "subscription-based-order",
+    totalProductCost: 500,
+    shippingCost: 30,
+    totalCost: 530
+},
+ 
+
+// Disadvantages of this
+-> Nested totaling of price
+-> Implemententing cancel feature on order is not easy
+-> Manage cancel refunded status for particular product is also not easy
+
+// Advantage of this
+-> 
+
+
+
+2)
+{
+    product: Tirupati milk
+    type: "normal-order",
+    totalProductCost: 75,
+    shippingCost: 30,
+    totalCost: 105
+},
+{
+    product: Gulabjamun
+    type: "scheduled",
+    totalProductCost: 52,
+    shippingCost: 30,
+    totalCost: 82
+},
+{
+    product: Cheese,
+    type: "subscription-based-order",
+    totalProductCost: 500,
+    shippingCost: 30,
+    totalCost: 530
+},
+{
+    product: Coco-powder,
+    type: "subscription-based-order",
+    totalProductCost: 500,
+    shippingCost: 30,
+    totalCost: 530
+},
+
+// Disadvantages of this
+
+// Advantage of this
+-> Easy total during razor pay
+-> Easy cancel option
+-> Easy refund
+-> Product specific coupon apply is also easy
+-> assigning delivery boy to particular product is also easily possible
+-> Payment of single order is also easy
