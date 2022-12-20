@@ -1,2 +1,45 @@
 Why Node.js is single threaded?
 Node.js uses a single threaded model in order to support async processing. With async processing, an application can perform better and is more scalable under web loads. Thus, Node.js makes use of a single-threaded model approach rather than typical thread-based implementation.
+
+How do Node.js works?
+Node.js is a virtual machine that uses JavaScript as its scripting language and runs on a v8 environment. It works on a single-threaded event loop and a non-blocking I/O which provides high rate as it can handle a higher number of concurrent requests. Also, by making use of the ‘HTTP’ module, Node.js can run on any stand-alone web server. 
+
+Where Node.js can be used?
+  Real-Time Web Applications
+  Network Applications
+  Distributed Systems
+  Web apis
+  Command line tools
+
+How many types of API functions are there in Node.js?
+There are two types of API functions in Node.js:
+  Asynchronous, non-blocking functions
+  Synchronous, blocking functions
+
+What do you understand by Event-driven programming?
+Event-driven programming is an approach that heavily makes use of events for triggering various functions. An event can be anything like a mouse click, key press, etc. When an event occurs, a call back function is executed that is already registered with the element. This approach mainly follows the publish-subscribe pattern. Because of event-driven programming, Node.js is faster when compared to other technologies.
+
+What do you understand by a test pyramid?
+A test pyramid basically is a diagram that describes the ratio of how many unit tests, integration tests, and end-to-end test are required to be written for the successful development of the project.
+
+
+Explain libuv.
+Libuv is a multi-platform support library of Node.js which majorly is used for asynchronous I/O. It was primarily developed for Node.js,  with time it is popularly practiced with other systems like as Luvit, pyuv, Julia, etc. Libuv is basically an abstraction around libev/ IOCP depending on the platform, providing users an API based on libev. A few of the important features of libuv are:
+
+  Full-featured event loop backed
+  File system events
+  Asynchronous file & file system operations
+  Asynchronous TCP & UDP sockets
+  Child processes
+  
+  
+Differentiate between spawn() and fork() methods in Node.js?
+In Node.js, the spawn() is used to launch a new process with the provided set of commands. This method doesn’t create a new V8 instance and just one copy of the node module is active on the processor. When your child process returns a large amount of data to the Node you can invoke this method.
+
+Syntax:
+child_process.spawn(command[, args][, options])
+Whereas, the fork() in Node.js is a special instance of spawn() that executes a new instance of the V8 engine. This method simply means that multiple workers are running on a single Node code base for various task.
+
+Syntax:
+child_process.fork(modulePath[, args][, options])
+In case you are facing any challenges with these Node.js Interview Qu
