@@ -1,0 +1,107 @@
+/* 
+╔══════════════════════════════════════════════╗
+║     🔍 SRP Refactoring Checklist (Node.js)   ║
+╚══════════════════════════════════════════════╝
+
+🔎 PART 1: Does SRP Violation Exist?
+[ ] Does this function/module do more than one thing?
+[ ] Are unrelated concerns mixed (e.g., validation + DB + email)?
+[ ] Is this file changed often for unrelated reasons?
+[ ] Is it hard to test this in isolation?
+[ ] Frequent merge conflicts in this file?
+[ ] Can't explain its purpose in one clear sentence?
+[ ] Are decisions and side effects mixed?
+[ ] Is the team editing this for different features?
+
+📉 PART 2: Should I *NOT* Apply SRP (Yet)?
+[ ] Is this a small script, tool, or MVP?
+[ ] Is it stable and unlikely to change?
+[ ] Will splitting add more boilerplate than clarity?
+[ ] Will it be harder to follow if split?
+[ ] Is this a critical fix or tight deadline?
+[ ] Is the logic tightly coupled by nature?
+[ ] Would this be harder to test/debug if split?
+
+ 
+
+🧠 Decision Guide:
+✅ 3+ YES in Part 1 → Refactor for SRP
+✅ 2+ YES in Part 2 → Skip SRP for now
+✅ 2+ YES in Part 3 → Refactor when possible
+
+📌 Reminder - Break Into:
+- validators/
+- services/
+- adapters/ (DB, email, fs, etc.)
+- controllers/ (coordination)
+- domain/ (business logic)
+- formatters/
+
+*/
+
+// paymentService.js
+
+class OrderModel {
+  static async updateOne(query, update) {
+    console.log(
+      `Updating order with query: ${JSON.stringify(
+        query
+      )} and update: ${JSON.stringify(update)}`
+    );
+  }
+}
+
+async function callPaymentGateway(cardInfo, amount) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ success: true, transactionId: "12345" });
+    }, 1000);
+  });
+}
+
+async function sendInvoiceEmail(userId, orderId) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = true;
+      if (!result) return reject(new Error("Failed to send email"));
+      resolve({ success: true });
+    }, 1000);
+  });
+}
+
+async function processPayment(orderId, userId, amount, cardInfo) {
+  if (!cardInfo || !amount) throw new Error("Missing payment details");
+
+  const paymentResult = await callPaymentGateway(cardInfo, amount);
+  if (!paymentResult.success) throw new Error("Payment failed");
+
+  await OrderModel.updateOne({ _id: orderId }, { status: "PAID" });
+
+  await sendInvoiceEmail(userId, orderId);
+}
+
+async function executeTransaction(cardInfo, amount) {
+  const result = await callPaymentGateway(cardInfo, amount);
+  if (!result.success) throw new Error("Payment failed");
+}
+
+// change anti srp to srp
+function validatePaymentInfo(cardInfo, amount) {
+  if (!cardInfo || !amount) throw new Error("Missing payment details");
+}
+
+async function markOrderAsPaid(orderId) {
+  await OrderModel.updateOne({ _id: orderId }, { status: "PAID" });
+}
+
+async function processPayment(orderId, userId, amount, cardInfo) {
+  try {
+    validatePaymentInfo(cardInfo, amount);
+    await executeTransaction(cardInfo, amount);
+    await markOrderAsPaid(orderId);
+    await sendInvoiceEmail(userId, orderId);
+  } catch (error) {
+    console.error("Payment processing failed: ", error);
+    throw error;
+  }
+}
