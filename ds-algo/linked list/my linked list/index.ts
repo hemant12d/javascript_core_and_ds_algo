@@ -1,177 +1,223 @@
-// Linked List 
-// Head, tail
+// basic node implementation
 
-// ( [val, add-1], [val, add-2], [val, add-3], [val, add-4], [val, null] )
+class LLNode {
+  value!: any;
+  next!: LLNode | null;
 
-// let first = new Node(56);
-// first.next = new Node(45);
-// first.next.next = new Node(57);
-// first.next.next.next = new Node(57);
-// first.next.next.next.next = new Node(77);
-// console.log(first.next.next.next.next)
-
-
-export {}
-interface LinkedListType {
-    list: Array<[number, string]>
-    listLen:() => number
-    push: (newNode: number) => void
-    getList: () => void
-    pushToIndex: (val: number, index: number, address?: string)=>void
-    removeFromIndex: (index: number) => any
-    getListValues: ()=> Array<number> | void
+  constructor(data: any) {
+    this.value = data;
+    this.next = null;
+  }
 }
 
-const genRanHex = (size): string => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
-const lengthOfAddress: number = 8;
-
-
-class linkedList {
-    list: Array<any> = []; 
-    listLen = ()=> this.list.length;
-    // constructor(val){    }
-
-    // Add item to the end of list
-    push(newNodeValue): void{
-
-        // Insert first list
-        if(this.listLen() === 0){
-            this.list[0] = [newNodeValue, null];
-            return;
-        }
-
-        // * Add address of new node to last element of the list
-        this.list[this.listLen()-1][1] = genRanHex(lengthOfAddress); // address for new elem
-
-        // * Added the items to last in the list
-        this.list.push([newNodeValue, null]);    
-    }
- 
-    getList = ():void =>console.log(this.list);
-    
-    pushToIndex = (val, index, address = genRanHex(lengthOfAddress)) =>{
-
-        if(index > this.listLen()){
-            console.log("You can only push at the end or inside linked list");
-            return;
-        }
-
-        // TODO Add node to first position 
-        if(index === 0){
-            // ! Generating address for first node if list already contains node, else assign null address to node
-
-            let first_Element_Address = this.listLen() ? genRanHex(lengthOfAddress) : null;
-
-            // Insert at starting & pointing address of first 
-            this.list.unshift([val, first_Element_Address]);
-
-            console.log("+ Node Added, starting ", this.list[0]);
-            return;
-        }
-
-        // TODO Added node to last
-        if(index === this.listLen()){
-            // * Handle address when there is only no item in index
-
-            // Create address for last
-            const lastElementAddress = genRanHex(lengthOfAddress);
-
-            // Second last pointing to last node's address
-            this.list[this.listLen()-1][1] = lastElementAddress;
-
-            // Added element to last
-            this.list.push([val, null]);
-            console.log("+ Node Added, end ", [val, null]);
-            return;
-        }
-
-        // TODO Add to middle
-
-        // Get the address of future next element, this address will be pointed by new Node
-        const future_Next_Element_Address = this.list[index-1][1];
-
-        // Previous storing address of new node
-        this.list[index-1][1] = address;
-
-        // Add value of new node to index & new node pointing to next element
-        this.list.splice(index, 0, [val, future_Next_Element_Address]); // Yes, splice can insert value to array
-    }
-
-    removeFromIndex = (index): any =>{
-        if(this.listLen() === 0) return;
-
-        // TODO Remove first element 
-        if(index === 0) return this.list.splice(0, 1);
-
-        // Remove from last
-        if(index === this.listLen() - 1){
-            // Remove last element
-            this.list.splice((this.listLen()-1), 1);
-            this.list[this.listLen() - 1][1] = null;
-            return; 
-        }
-
-        // TODO Remove from middle
-        const address_Of_Element_That_Delete_Element_Pointing = this.list[index][1];
-
-        // Delete Previous element pointing to delete next element
-        this.list[index-1][1] = address_Of_Element_That_Delete_Element_Pointing
-
-        // Remove element from middle
-        this.list.splice(index, 1);
-
-        return;
-    }
-
-    // TODO Get the all node values
-    getListValues = (): Array<number> | void => this.list.map(val => val[0]); 
+interface ISingleList {
+  push(data: number): void;
+  pop(): void;
+  pushToIndex(data: number, index: number): void;
+  removeToIndex(index: number): number;
+  getFromIndex(index: number): LLNode | null;
 }
 
+class SingleList implements ISingleList {
+  head!: null | LLNode;
+  tail!: null | LLNode;
+  length: number = 0;
 
+  push(data: number) {
+    const newNode = new LLNode(data);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.incrementLength();
+      return;
+    }
 
-// Create first node
-const newNode: LinkedListType = new linkedList();
-newNode.push(45);
-newNode.getList();
+    this.tail!.next = newNode;
+    this.tail = newNode;
+    this.incrementLength();
+    return;
+  }
 
-// Second Node
-newNode.push(55);
-newNode.getList();
+  getNodesAsArray(): number[] {
+    if (!this.length) return [];
 
-// Third Node
-newNode.push(45);
-newNode.getList();
+    const nodeElements = Array<number>();
 
-// Fourth Node
-newNode.push(29);
-newNode.getList();
+    let currentNode = this.head;
+    for (let i = 1; i <= this.length; i++) {
+      nodeElements.push(currentNode!.value);
+      currentNode = currentNode!.next;
+    }
 
-// Fifth Node
-newNode.push(87);
-newNode.getList();
+    return nodeElements;
+  }
 
-// Push item to the middle of index
-newNode.pushToIndex(23, 1);
-newNode.getList();
+  incrementLength(num: number = 1) {
+    this.length = this.length + num;
+    return this.length;
+  }
 
-// Adding items at the starting
-newNode.pushToIndex(12, 0);
-newNode.getList(); 
+  decrementLength(num: number = 1) {
+    this.length = this.length - num;
+    return this.length;
+  }
 
-newNode.pushToIndex(34, 0);
-newNode.getList(); 
+  getFromIndex(index: number) {
+    if (index > this.length || index < 1) {
+      return null;
+    }
 
-// newNode.removeFromIndex(0);
-// newNode.getList(); 
+    let currentNode = this.head; //1, 2, 3, 4
+    for (let i = 1; i < index; i++) {
+      currentNode = currentNode!.next; //
+    }
 
-newNode.removeFromIndex(4); 
-newNode.getList(); 
+    return currentNode;
+  }
 
-newNode.removeFromIndex(6);
-newNode.getList(); 
+  unshift(data: number) {
+    const newNode = new LLNode(data);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
 
-newNode.removeFromIndex(0);
-newNode.getList(); 
+    this.incrementLength();
+  }
 
-console.log(newNode.listLen());
-console.log(newNode.getListValues());
+  shift() {
+    if (!this.length) return;
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+
+      this.decrementLength();
+      return;
+    }
+
+    this.head = this.head!.next;
+
+    this.decrementLength();
+    return;
+  }
+
+  pop(): number {
+    if (!this.length) {
+      return -1;
+    }
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+      this.decrementLength();
+      return 1;
+    }
+
+    this.tail = null;
+    let currentNode = this.head;
+    let secondLastNodeIndex = this.length - 1;
+
+    for (let i = 1; i < this.length; i++) {
+      if (i === secondLastNodeIndex) {
+        this.tail = currentNode;
+        currentNode!.next = null;
+        break;
+      }
+      currentNode = currentNode!.next;
+    }
+
+    this.decrementLength();
+    return 1;
+  }
+
+  pushToIndex(data: number, index: number) {
+    if (index < 1 || index > this.length + 1) {
+      return;
+    }
+
+    if (index === 1) {
+      return this.unshift(data);
+    }
+
+    if (index === this.length + 1) {
+      return this.push(data);
+    }
+
+    const newNode = new LLNode(data);
+
+    let currentNode = this.head;
+
+    for (let i = 1; i < this.length; i++) {
+      if (i + 1 === index) {
+        newNode.next = currentNode!.next;
+        currentNode!.next = newNode;
+        break;
+      }
+
+      currentNode = currentNode!.next; // iterate node with next;
+    }
+
+    this.incrementLength();
+  }
+
+  removeToIndex(index: number) {
+    if (index < 1 || index > this.length) {
+      return -1;
+    } // 34, 45, 65, 70 => 34, 65, 70
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+      this.decrementLength();
+    }
+
+    if (index === 1) {
+      this.shift();
+      return 1;
+    }
+
+    if (this.length === index) {
+      return this.pop();
+    }
+
+    let indexPrevNode = this.head;
+
+    for (let i = 1; i < index - 1; i++) {
+      indexPrevNode = indexPrevNode!.next;
+    }
+
+    const removedNode = indexPrevNode!.next;
+    indexPrevNode!.next = removedNode!.next;
+
+    this.decrementLength();
+    return 1;
+  }
+}
+
+const singleList = new SingleList();
+singleList.push(34); // 1
+// console.log(singleList);
+
+singleList.push(45); // 2
+// console.log(singleList);
+
+singleList.push(65); // 3
+
+singleList.push(70); // 4
+// console.log(singleList);
+
+// console.log("push item in the beginning");
+// singleList.unshift(12);
+
+// singleList.pushToIndex(90, 5)
+// console.log(singleList.getNodesAsArray())
+
+// singleList.pop()
+// console.log(singleList.getNodesAsArray())
+
+singleList.removeToIndex(1);
+console.log(singleList.getNodesAsArray());

@@ -1,12 +1,12 @@
 // Implement the quick sort algo
 
-// 1) Implement the povit point function
+// 1) Implement the pivot point function
 
 // 2) Implement the SwapValuesInArray function
 
 // 3) Implement the Recursive QuickSort
 
-// 4) Fit them smartely for best performance
+// 4) Fit them smartly for best performance
 
 // Swap function
 
@@ -16,7 +16,7 @@ function SwapValuesInArray(arr, swapIndexLocation, swapIndex) {
     arr[swapIndex] = temp;
 }
 
-const povitPoint = (arr, start = 0, end = arr.length) => {
+const pivotPoint = (arr, start = 0, end = arr.length) => {
 
 
     // Count the less value compare to start
@@ -53,7 +53,7 @@ function QuickSort(arr, left = 0, right = arr.length) {
 
     if (left === right || left === (right - 1)) return;
 
-    let arrangedIndexPosition = povitPoint(arr, left, right);
+    let arrangedIndexPosition = pivotPoint(arr, left, right);
 
     // Left...
     QuickSort(arr, left, arrangedIndexPosition);
@@ -63,7 +63,8 @@ function QuickSort(arr, left = 0, right = arr.length) {
 
     return arr;
 }
-let arrexp = [4, 45, 34, 645, 34, 3, 645, 756, 545];
+
+let arr = [4, 45, 34, 645, 34, 3, 645, 756, 545];
 
 console.log(QuickSort([45, 343, 534, 343, 23, 5, 4, 3, 534, 343, 3, 4, 4]));
 console.log(QuickSort([45, 343, 534, 343, 23, 5]));
