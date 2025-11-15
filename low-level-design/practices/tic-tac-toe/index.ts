@@ -40,6 +40,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+
 // Code
 enum GameState {
   WAITING_FOR_PLAYER,
@@ -263,11 +264,12 @@ class TicTacToe {
 const game = new TicTacToe();
 let gameRunning = true;
 
-const question = async (name: string) => {
+const question = async (question: string) => {
   return new Promise((resolve, reject) => {
-    rl.question(name, resolve);
+    rl.question(question, resolve);
   });
 };
+
 
 async function main() {
   const game = new TicTacToe();

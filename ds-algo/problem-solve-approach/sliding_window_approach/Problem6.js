@@ -15,7 +15,7 @@
 //     // set the loop limit, to keep in boundary to calculate the sum on n consecutive
 //     const loopLimit = (arr.length - n) + 1;
 
-//     let maxSum = 0;
+ 
 //     let tempSum = 0;
 
 //     for ( let i = 0; i < loopLimit; i++ ) {

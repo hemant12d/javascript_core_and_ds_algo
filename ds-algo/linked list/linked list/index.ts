@@ -88,23 +88,6 @@ class SingleList implements ISingleList {
     this.incrementLength();
   }
 
-  shift() {
-    if (!this.length) return;
-
-    if (this.length === 1) {
-      this.head = null;
-      this.tail = null;
-
-      this.decrementLength();
-      return;
-    }
-
-    this.head = this.head!.next;
-
-    this.decrementLength();
-    return;
-  }
-
   pop(): number {
     if (!this.length) {
       return -1;
@@ -149,16 +132,16 @@ class SingleList implements ISingleList {
 
     const newNode = new LLNode(data);
 
-    let currentNode = this.head;
+    let curentNode = this.head;
 
     for (let i = 1; i < this.length; i++) {
       if (i + 1 === index) {
-        newNode.next = currentNode!.next;
-        currentNode!.next = newNode;
+        newNode.next = curentNode!.next;
+        curentNode!.next = newNode;
         break;
       }
 
-      currentNode = currentNode!.next; // iterate node with next;
+      curentNode = curentNode!.next; // iterate node with next;
     }
 
     this.incrementLength();
@@ -176,8 +159,7 @@ class SingleList implements ISingleList {
     }
 
     if (index === 1) {
-      this.shift();
-      return 1;
+      // implementation of shitf
     }
 
     if (this.length === index) {
@@ -213,11 +195,11 @@ singleList.push(70); // 4
 // console.log("push item in the beginning");
 // singleList.unshift(12);
 
-// singleList.pushToIndex(90, 5)
-// console.log(singleList.getNodesAsArray())
+singleList.pushToIndex(90, 5);
+console.log(singleList.getNodesAsArray());
 
 // singleList.pop()
 // console.log(singleList.getNodesAsArray())
 
-singleList.removeToIndex(1);
+singleList.removeToIndex(3);
 console.log(singleList.getNodesAsArray());
