@@ -10,7 +10,6 @@
 const getDigit = (value, index) => {
 
     // 1) Approach 1
-
     // let str = value.toString();
     // if (str.length <= index) return 0;
     // return str[str.length - (index + 1)];
@@ -31,10 +30,9 @@ const mostDigit = arr => {
         mostDigit = Math.max(mostDigit, digitCount(arr[i]))
 
     return mostDigit;
-
 }
 
 console.log(mostDigit([3, 534, 343, 23, 534, 34343, 343434, 3432423]))
 console.log(mostDigit([3, 534, 343, 23, 534]))
 console.log(mostDigit([3, 34343, 343434, 3432423]))
-console.log(mostDigit([3, ,]))
+console.log(mostDigit([3, 6, 2, 1]))

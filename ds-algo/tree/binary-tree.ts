@@ -1,7 +1,9 @@
+// A Binary Tree Data Structure is a hierarchical data structure in which each node has at most two children, referred to as the left child and the right child. It is commonly used in computer science for efficient storage and retrieval of data, with various operations such as insertion, deletion, and traversal.
+
 class BTreeNode {
-  value: number;
-  leftNode: BTreeNode | null;
-  rightNode: BTreeNode | null;
+  value!: number;
+  leftNode!: BTreeNode | null;
+  rightNode!: BTreeNode | null;
 
   constructor(value: number) {
     this.value = value;
@@ -17,7 +19,7 @@ class BinaryTree {
     this.root = null;
   }
 
-  setRoot(value: number) {
+  setRoot(value: number): BTreeNode | null {
     this.root = new BTreeNode(value);
     return this.root;
   }
@@ -44,7 +46,7 @@ class BinaryTree {
 
     if (value > currentNode.value) {
       if (!currentNode.rightNode) currentNode.rightNode = node;
-    return this.setInsert(value, currentNode.rightNode);
+      return this.setInsert(value, currentNode.rightNode);
     }
 
     return currentNode;

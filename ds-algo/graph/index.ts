@@ -1,4 +1,4 @@
-class Grpah {
+class Graph {
 	private adjacencyList!:Map<number, number[]>;
 	private adjacencyMatrix!:any;
 
@@ -6,7 +6,7 @@ class Grpah {
 		this.adjacencyList = new Map();
 	}
 
-	addVertex(vertex: number){
+	setVertex(vertex: number){
 		if(!this.adjacencyList.get(vertex)){
 			this.adjacencyList.set(vertex, [])
 		}
@@ -22,16 +22,16 @@ class Grpah {
 			this.adjacencyList.set(vertex2, [...v2Edges, vertex1]);
 	}
 
-	getVertexEdges(vertex: number): number[] | undefined {
+	getEdges(vertex: number): number[] | undefined {
 		return this.adjacencyList.get(vertex);
 	}
 }
 
 
-const graph = new Grpah();
-graph.addVertex(5);
-graph.addVertex(6);
-graph.setEdge(5, 6)
+const graph = new Graph();
+graph.setVertex(5);
+graph.setVertex(6);
+graph.setEdge(5, 6);
 
-console.log(graph.getVertexEdges(5));
-console.log(graph.getVertexEdges(6));
+console.log(graph.getEdges(5));
+console.log(graph.getEdges(6));
