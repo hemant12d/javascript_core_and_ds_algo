@@ -43,6 +43,8 @@ function mergeSortedArray(arr1, arr2) {
 
 // Implement the merge sort
 function mergeSort(arr) {
+    if(!Arrays.isArray(arr)) return null;
+
     // Base Cases
     if (arr.length <= 1) return arr;
 

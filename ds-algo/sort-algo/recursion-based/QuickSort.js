@@ -55,10 +55,8 @@ function QuickSort(arr, left = 0, right = arr.length) {
 
     let arrangedIndexPosition = pivotPoint(arr, left, right);
 
-    // Left...
     QuickSort(arr, left, arrangedIndexPosition);
 
-    // Right...
     QuickSort(arr, arrangedIndexPosition + 1, right);
 
     return arr;
