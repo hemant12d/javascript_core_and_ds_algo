@@ -1,5 +1,3 @@
-// basic node implementation
-
 class LLNode {
   value!: any;
   next!: LLNode | null;
@@ -17,6 +15,7 @@ interface ISingleList {
   removeToIndex(index: number): number;
   getFromIndex(index: number): LLNode | null;
   getMiddleNode(): number | null;
+  hasCycle(): boolean;
 }
 
 class SingleList implements ISingleList {
@@ -39,7 +38,7 @@ class SingleList implements ISingleList {
     return;
   }
 
-  getNodesAsArray(): number[] {
+  traverseList(): number[] {
     if (!this.length) return [];
 
     const nodeElements = Array<number>();
@@ -101,6 +100,8 @@ class SingleList implements ISingleList {
       return 1;
     }
 
+    // 1 2 3 4
+
     this.tail = null;
     let currentNode = this.head;
     let secondLastNodeIndex = this.length - 1;
@@ -133,16 +134,16 @@ class SingleList implements ISingleList {
 
     const newNode = new LLNode(data);
 
-    let curentNode = this.head;
+    let currentNode = this.head;
 
     for (let i = 1; i < this.length; i++) {
       if (i + 1 === index) {
-        newNode.next = curentNode!.next;
-        curentNode!.next = newNode;
+        newNode.next = currentNode!.next;
+        currentNode!.next = newNode;
         break;
       }
 
-      curentNode = curentNode!.next; // iterate node with next;
+      currentNode = currentNode!.next; // iterate node with next;
     }
 
     this.incrementLength();
@@ -151,7 +152,7 @@ class SingleList implements ISingleList {
   removeToIndex(index: number) {
     if (index < 1 || index > this.length) {
       return -1;
-    } // 34, 45, 65, 70 => 34, 65, 70
+    }
 
     if (this.length === 1) {
       this.head = null;
@@ -160,7 +161,7 @@ class SingleList implements ISingleList {
     }
 
     if (index === 1) {
-      // implementation of shitf
+      // implementation of shift
     }
 
     if (this.length === index) {
@@ -193,28 +194,33 @@ class SingleList implements ISingleList {
 
     return slow.value;
   }
+
+  hasCycle(): boolean {
+    let slow = this.head;
+    let fast: LLNode | null = this.head;
+
+    while (fast && fast.next) {
+      slow = slow!.next;
+      fast = fast.next.next;
+
+      if (slow && fast && slow.value === fast.value) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  createCycle() {
+    this.tail!.next = this.head;
+  }
 }
 
 const singleList = new SingleList();
-singleList.push(34); // 1
-// console.log(singleList);
+// singleList.push(34);
+// singleList.push(45); 
+// singleList.push(65); 
+// singleList.push(70); 
+// singleList.push(81);
 
-singleList.push(45); // 2
-// console.log(singleList);
-
-singleList.push(65); // 3
-
-singleList.push(70); // 4
-// console.log(singleList);
-
-// console.log("push item in the beginning");
-// singleList.unshift(12);
-
-singleList.pushToIndex(90, 5);
-console.log(singleList.getNodesAsArray());
-
-// singleList.pop()
-// console.log(singleList.getNodesAsArray())
-
-singleList.removeToIndex(3);
-console.log(singleList.getNodesAsArray());
+// console.log(singleList.getMiddleNode());
