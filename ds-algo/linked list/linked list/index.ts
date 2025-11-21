@@ -16,7 +16,8 @@ interface ISingleList {
   getFromIndex(index: number): LLNode | null;
   getMiddleNode(): number | null;
   hasCycle(): boolean;
-  findNthFromEnd(n: number): number;
+  nthFromTheEnd(n: number): number;
+  removeDuplicate(): void;
 }
 
 class SingleList implements ISingleList {
@@ -196,7 +197,7 @@ class SingleList implements ISingleList {
     return slow.value;
   }
 
-  findNthFromEnd(n: number): number {
+  nthFromTheEnd(n: number): number {
     let mainPtr = this.head;
     let refPtr = mainPtr;
 
@@ -231,6 +232,20 @@ class SingleList implements ISingleList {
 
   createCycle() {
     this.tail!.next = this.head;
+  }
+
+  removeDuplicate() {
+    let curr = this.head;
+
+    while (curr && curr.next) {
+      if (curr.value !== curr.next.value) {
+        curr = curr.next;
+        continue;
+      }
+
+      curr.next = curr.next!.next;
+      this.decrementLength();
+    }
   }
 }
 
