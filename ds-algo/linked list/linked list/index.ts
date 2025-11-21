@@ -16,6 +16,7 @@ interface ISingleList {
   pushToIndex(data: number, index: number): void;
   removeToIndex(index: number): number;
   getFromIndex(index: number): LLNode | null;
+  getMiddleNode(): number | null;
 }
 
 class SingleList implements ISingleList {
@@ -177,6 +178,20 @@ class SingleList implements ISingleList {
 
     this.decrementLength();
     return 1;
+  }
+
+  getMiddleNode(): number | null {
+    if (!this.head) return null;
+
+    let slow: LLNode = this.head;
+    let fast: LLNode | null = this.head;
+
+    while (fast && fast.next) {
+      slow = slow!.next!;
+      fast = fast.next.next;
+    }
+
+    return slow.value;
   }
 }
 
