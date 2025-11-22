@@ -249,6 +249,43 @@ class SingleList implements ISingleList {
   }
 }
 
+function mergeSortedList(list1: SingleList, list2: SingleList) {
+  if (!list1.head) {
+    return list2.head ? list2.head.next : null;
+  }
+
+  if (!list2.head) {
+    return list1.head ? list1.head.next : null;
+  }
+
+  let l1Head: LLNode | null = list1.head;
+  let l2Head: LLNode | null = list2.head;
+
+  const newList = new SingleList();
+
+  while (l1Head && l2Head) {
+    if (l1Head.value < l2Head.value) {
+      newList.push(l1Head.value);
+      l1Head = l1Head.next;
+      continue;
+    }
+
+    newList.push(l2Head.value);
+    l2Head = l2Head.next;
+  }
+
+  if (!l1Head) {
+    newList.tail!.next = l2Head;
+  }
+
+  if (!l2Head) {
+    newList.tail!.next = l1Head;
+  }
+
+  return newList.head!.value;
+}
+
+
 const singleList = new SingleList();
 // singleList.push(34);
 // singleList.push(45); 
